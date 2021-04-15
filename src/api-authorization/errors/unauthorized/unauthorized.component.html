@@ -1,0 +1,18 @@
+<div
+  style="height: 50%"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  fxLayoutGap="20px"
+>
+  <h1>HTTP 401 Error: unauthorized!</h1>
+  <div *ngIf="isAuthenticated | async; else anonymous">
+    <p>Your account does not have permission to view this page</p>
+    <em>
+      <a [routerLink]="['/authentication/logut']">Log out</a> and log in with
+      authorized account
+    </em>
+  </div>
+  <ng-template #anonymous>
+    <a [routerLink]="['/authentication/login']">Log in</a>
+  </ng-template>
+</div>

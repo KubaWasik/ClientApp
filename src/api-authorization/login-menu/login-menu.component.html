@@ -1,0 +1,48 @@
+<div *ngIf="isSmallScreen; else top">
+  <div *ngIf="isAuthenticated | async; else anonymousSide">
+    <a
+      mat-list-item
+      matTooltip="Manage"
+      [routerLink]="['/authentication/profile']"
+    >
+      Hello {{ userName | async }}
+    </a>
+    <a
+      mat-list-item
+      title="Logout"
+      [routerLink]="['/authentication/logout']"
+      [state]="{ local: true }"
+    >
+      Logout
+    </a>
+  </div>
+  <ng-template #anonymousSide>
+    <a mat-list-item [routerLink]="['/authentication/register']">Register</a>
+    <a mat-list-item [routerLink]="['/authentication/login']">Login</a>
+  </ng-template>
+</div>
+<ng-template #top>
+  <div
+    fxLayout="row"
+    fxLayoutAlign="space-between"
+    *ngIf="isAuthenticated | async; else anonymousTop"
+  >
+    <a mat-button matTooltip="Manage" [routerLink]="['/authentication/profile']"
+      >Hello {{ userName | async }}
+    </a>
+    <a
+      mat-button
+      matTooltip="Logout"
+      [routerLink]="['/authentication/logout']"
+      [state]="{ local: true }"
+    >
+      Logout
+    </a>
+  </div>
+  <ng-template #anonymousTop>
+    <mat-nav-list fxLayout="row" style="padding-top: 0px">
+      <a mat-button [routerLink]="['/authentication/register']">Register</a>
+      <a mat-button [routerLink]="['/authentication/login']">Login</a>
+    </mat-nav-list>
+  </ng-template>
+</ng-template>
